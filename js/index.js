@@ -43,9 +43,30 @@ function removeProduct(event) {
 }
 
 // ITERATION 5
-
 function createProduct() {
-  //... your code goes here
+  const newProductDataArr = Array.from(document.getElementsByTagName("input"));
+  const newProductPrice = Number(newProductDataArr[newProductDataArr.length-1].value);
+  const newProductName = newProductDataArr[newProductDataArr.length-2].value;
+  const newProduct = document.createElement("tr");
+  newProduct.classList.add("product");
+  newProduct.innerHTML = `
+  <td class="name">
+    <span>${newProductName}</span>
+  </td>
+  <td class="price">$<span>${newProductPrice}</span></td>
+  <td class="quantity">
+    <input type="number" value="0" min="0" placeholder="Quantity" />
+  </td>
+  <td class="subtotal">$<span>0</span></td>
+  <td class="action">
+    <button class="btn btn-remove">Remove</button>
+  </td>
+`;
+
+  console.log(newProduct);
+  const insertNewProductHere = document.getElementsByTagName("tbody");
+  console.log(insertNewProductHere);
+  insertNewProductHere[0].appendChild(newProduct);
 }
 
 window.addEventListener('load', () => {
@@ -56,4 +77,6 @@ window.addEventListener('load', () => {
   for(let removeBtn of removeProductBtnArr) {
     removeBtn.addEventListener("click", removeProduct);
   }
+  const createBtn = document.getElementById("create");
+  createBtn.addEventListener("click", createProduct)
 });
