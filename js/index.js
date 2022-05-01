@@ -20,10 +20,16 @@ function calculateAll() {
   // end of test */
 
   // ITERATION 2
-  
+  const products = document.getElementsByClassName("product");
+  const productArr = Array.from(products);
+  let totalValue = 0;
+  for(let productItem of productArr){
+    totalValue += Number(updateSubtotal(productItem));
+  }
 
   // ITERATION 3
-  //... your code goes here
+  const total = document.getElementById("total-value").getElementsByTagName("span");
+  total[0].innerHTML = totalValue;
 }
 
 // ITERATION 4
