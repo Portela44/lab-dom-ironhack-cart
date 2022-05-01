@@ -1,7 +1,7 @@
 // ITERATION 1
 
 function updateSubtotal(product) {
-  console.log('Calculating subtotal, yey!');
+  //console.log('Calculating subtotal, yey!');
   const price = product.querySelector('.price span');
   const quantity = product.querySelector('input');
   const subtotal = product.querySelector('.subtotal span');
@@ -36,7 +36,7 @@ function calculateAll() {
 
 function removeProduct(event) {
   const target = event.currentTarget;
-  console.log('The target in remove is:', target);
+  //console.log('The target in remove is:', target);
   const targetProduct = event.currentTarget.parentNode.parentNode;
   targetProduct.parentNode.removeChild(targetProduct);
   calculateAll();
@@ -62,21 +62,31 @@ function createProduct() {
     <button class="btn btn-remove">Remove</button>
   </td>
 `;
-
-  console.log(newProduct);
   const insertNewProductHere = document.getElementsByTagName("tbody");
-  console.log(insertNewProductHere);
   insertNewProductHere[0].appendChild(newProduct);
-}
-
-window.addEventListener('load', () => {
-  const calculatePricesBtn = document.getElementById('calculate');
-  calculatePricesBtn.addEventListener('click', calculateAll);
+  /*For some reason, just invoking eventListener() function here is not enough to 
+  add the listener click action to the new-created remove buttons. So I copied the whole process again*/
   const removeProductBtn = document.getElementsByClassName("btn-remove");
   const removeProductBtnArr = Array.from(removeProductBtn);
   for(let removeBtn of removeProductBtnArr) {
     removeBtn.addEventListener("click", removeProduct);
   }
-  const createBtn = document.getElementById("create");
-  createBtn.addEventListener("click", createProduct)
-});
+}
+
+
+function eventListener() {
+  window.addEventListener('load', () => {
+    const calculatePricesBtn = document.getElementById('calculate');
+    calculatePricesBtn.addEventListener('click', calculateAll);
+    const removeProductBtn = document.getElementsByClassName("btn-remove");
+    const removeProductBtnArr = Array.from(removeProductBtn);
+    for(let removeBtn of removeProductBtnArr) {
+      removeBtn.addEventListener("click", removeProduct);
+    }
+    const createBtn = document.getElementById("create");
+    createBtn.addEventListener("click", createProduct);
+  });
+}
+eventListener();
+
+
